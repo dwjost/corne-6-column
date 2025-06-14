@@ -35,10 +35,9 @@
 
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
             #binding-cells = <2>;
             tapping-term-ms = <HM_TAP_TERM>;
-            quick_tap_ms = <HM_QUICK_TAP_TERM>;
+            quick-tap-ms = <HM_QUICK_TAP_TERM>;
             require-prior-idle-ms = <HM_REQUIRE_IDLE_MS>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
