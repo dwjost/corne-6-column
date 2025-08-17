@@ -11,10 +11,11 @@
 
 #define CORNE_COLEMAK_DH   0
 #define CORNE_QWERTY       1
-#define CORNE_KEYPAD       2
-#define CORNE_FUNCTION     3
-#define CORNE_NAV          4
-#define CORNE_DEF_MOD      5
+#define CORNE_QWERTY_GAME  2
+#define CORNE_KEYPAD       3
+#define CORNE_FUNCTION     4
+#define CORNE_NAV          5
+#define CORNE_DEF_MOD      6
 
 #define QWERTY            CORNE_QWERTY
 
@@ -99,6 +100,13 @@
             bindings = <&kp Q>, <&to CORNE_QWERTY>;
         };
 
+        td_corne_qg: tap_dance_to_corne_qwerty_game {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <TD_HM_TAP_TERM>;
+            bindings = <&kp Q>, <&to CORNE_QWERTY_GAME>;
+        };
+
         td_corne_c: tap_dance_to_corne_colemak {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -136,6 +144,13 @@
             bindings = <&mmv MOVE_RIGHT>, <&msc SCRL_RIGHT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        td_tab_tilde: tap_dance_tab_tilde {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <TD_HM_TAP_TERM>;
+            bindings = <&kp TAB>, <&kp TILDE>;
+        };
+
     };
 
 
@@ -155,10 +170,20 @@
         qwerty_layer {
                 display-name = "Qwerty";
             bindings = <
-  &kp TAB    &td_corne_c         &kp W                &kp E                 &kp R                 &kp T                  &kp Y                &kp U      &kp I                &kp  O                 &kp P                  &kp BSPC
+  &kp TAB    &td_corne_qg        &kp W                &kp E                 &kp R                 &kp T                  &kp Y                &kp U      &kp I                &kp  O                 &kp P                  &kp BSPC
   &kp ESC    &hm LCTRL A         &hm LGUI S           &hm LALT D            &hm LSHIFT F          &kp G                  &kp H                &td_hm_j   &td_hm_k             &td_hm_l               &hm RCTRL SEMI         &kp SQT
   &kp LSHFT  &td_z               &lt CORNE_DEF_MOD X  &lt CORNE_FUNCTION C  &td_v                 &kp B                  &kp N                &kp M      &lt CORNE_NAV COMMA  &lt CORNE_DEF_MOD DOT  &lt CORNE_KEYPAD FSLH  &kp ESC
                                                       &kp BSPC              &mo CORNE_KEYPAD      &td_corne_cw_nav       &lt CORNE_NAV ENTER  &kp SPACE  &mo CORNE_KEYPAD
+ >;
+        };
+
+        qwerty_game_layer {
+                display-name = "Q Game";
+            bindings = <
+  &td_tab_tilde  &td_corne_c   &kp W                &kp E                 &kp R                 &kp T                  &kp Y                &kp U      &kp I                &kp  O                 &kp P                  &kp BSPC
+  &hm LCTRL ESC  &kp A         &kp S                &kp D                 &kp F                 &kp G                  &kp H                &kp J      &kp K                &kp L                  &kp SEMI               &kp SQT
+  &kp LSHFT      &td_z         &lt CORNE_DEF_MOD X  &lt CORNE_FUNCTION C  &td_v                 &kp B                  &kp N                &kp M      &lt CORNE_NAV COMMA  &lt CORNE_DEF_MOD DOT  &lt CORNE_KEYPAD FSLH  &kp ESC
+                                                    &kp BSPC              &mo CORNE_KEYPAD      &kp SPACE              &lt CORNE_NAV ENTER  &kp SPACE  &mo CORNE_KEYPAD
  >;
         };
 
